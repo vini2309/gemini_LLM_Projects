@@ -1,0 +1,12 @@
+streamlit
+google-generativeai
+python-dotenv # to load the environment variables
+langchain
+PyPDF2
+chromadb
+faiss-cpu
+langchain_google_genai
+youtube_transcript_api
+pathlib
+pytube
+git+https://github.com/openai/whisper.git

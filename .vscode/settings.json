@@ -1,0 +1,5 @@
+{
+    "python.analysis.extraPaths": [
+        "./geminivenv/Lib/site-packages"
+    ]
+}
