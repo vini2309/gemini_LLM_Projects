@@ -5,7 +5,7 @@ load_dotenv() ##load all the nevironment variables
 import os
 import google.generativeai as genai
 
-from youtube_transcript_api import YouTubeTranscriptApi, TranscriptsDisabled
+from youtube_transcript_api import YouTubeTranscriptApi, TranscriptsDisabled, NoTranscriptFound
 import whisper
 import torch
 from pytube import YouTube
@@ -33,7 +33,7 @@ def extract_transcript_details(youtube_video_url):
 
         return transcript
     
-    except TranscriptsDisabled:
+    except [TranscriptsDisabled, NoTranscriptFound]:
         #Set the device
         device = "cuda" if torch.cuda.is_available() else "cpu"
         # Load the model
@@ -87,7 +87,7 @@ if youtube_link:
     print(video_id)
     st.image(f"http://img.youtube.com/vi/{video_id}/0.jpg", use_column_width=True)
 
-if st.button("Get Detailed Notes"):
+if st.button("Get Summary Notes"):
     transcript_text=extract_transcript_details(youtube_link)
     # Open the file in read mode
     # Open the file in read mode with explicit encoding
@@ -98,7 +98,7 @@ if st.button("Get Detailed Notes"):
     #print(transcript_text)
     if transcript_text:
         summary=generate_gemini_content(transcript_text,prompt)
-        st.markdown("## Detailed Notes:")
+        st.markdown("## Summary Notes:")
         st.write(summary)
 
 
